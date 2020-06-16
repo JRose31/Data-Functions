@@ -1,3 +1,4 @@
+#sort multiple list at once, utilizing the first argument as the sort rule
 def sort_list(*args):
 
     #sort both list by first parameter
@@ -15,10 +16,14 @@ def sort_list(*args):
     while counter < (length):
         #initialize new list to contain original list argument but sorted
         add_list = []
+        
         for i in args:
             add_list.append(i[counter])
-        counter += 1
+         
+        #add each list to entire results list
         results.append(add_list)
+        counter += 1
+        
     return(tuple(results))
 
 
@@ -27,6 +32,6 @@ z = ["one", "three", "five", "two", "four", "three"]
 y = ["uno", "tres", "cinco", "dos", "quatro", "tres"]
 n, i, o = sort_list(x, z, y)
 
-print(n)
-print(i)
-print(o)
+print(n) #returns [1, 2, 3, 3, 4, 5]
+print(i) #returns ["one", "two", "three", "three", "four", "five"]
+print(o) #returns ["uno", "dos", "tres", "tres", "quatro", "cinco"]
