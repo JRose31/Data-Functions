@@ -1,3 +1,5 @@
+import statistics
+
 #sort multiple list at once, utilizing the first argument as the sort rule
 def sort_list(*args):
 
@@ -49,3 +51,53 @@ n, i, o = sort_list(x, z, y)
 print(n) #returns [1, 2, 3, 3, 4, 5]
 print(i) #returns ["one", "two", "three", "three", "four", "five"]
 print(o) #returns ["uno", "dos", "tres", "tres", "quatro", "cinco"]
+
+
+
+'''
+converts missing values in a list to the mean of the list
+***currently only accepts one list argument***
+'''
+def avgna(n, *args):
+
+    #initialize list to hold null values
+    null_vals = []
+
+    #list without null values (used to get mean of set)
+    num_vals = []
+
+    #counter for indexing
+    counter = 0
+
+    for i in n:
+
+        '''check if instance is a number, if so, add to valid set. If instance
+        is not a number, get index of instance and the current value'''
+        try:
+            int(i)
+            num_vals.append(i)
+        except:
+            null_vals.append([counter, i])
+
+        counter+=1
+
+    '''get mean of good data
+    if argument is passed, return specified number of decimal points'''
+    if len(args) < 1:
+        avg = round(statistics.mean(num_vals), 2)
+    else:
+        avg = round(statistics.mean(num_vals), args[0])
+
+    #add new values in place of NaN
+    for i in null_vals:
+        num_vals.insert(i[0], avg)
+
+    return(num_vals)
+
+x = [1, 3, 2, 6, "NaN", 5, 8, " ", "!", 7]
+n = avgna(x)
+print(n) #returns [1, 3, 2, 6, 4.57, 5, 8, 4.57, 4.57, 7]
+
+#passing an additional numerical argument specifies number of decimal places to return
+n = avgna(x, 3)
+print(n) #returns [1, 3, 2, 6, 4.571, 5, 8, 4.571, 4.571, 7]
