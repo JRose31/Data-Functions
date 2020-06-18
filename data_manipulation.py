@@ -1,4 +1,5 @@
 import statistics
+import numpy as np
 
 #sort multiple list at once, utilizing the first argument as the sort rule
 def sort_list(*args):
@@ -101,3 +102,46 @@ print(n) #returns [1, 3, 2, 6, 4.57, 5, 8, 4.57, 4.57, 7]
 #passing an additional numerical argument specifies number of decimal places to return
 n = avgna(x, 3)
 print(n) #returns [1, 3, 2, 6, 4.571, 5, 8, 4.571, 4.571, 7]
+
+
+#removes rows with missing values
+def delna(*args):
+
+    #initialize list to hold null values
+    null_vals = []
+
+    #length_data = len(args[0])
+
+    for arg in args:
+
+        counter = 0
+
+        for i in arg:
+            try:
+                int(i)
+                counter += 1
+            except:
+                null_vals.append([counter, i])
+                counter += 1
+
+    #get unique indices of null values
+    index = []
+    for i in null_vals:
+        if i[0] not in index:
+            index.append(i[0])
+
+    #initialize list of results
+    results = []
+
+    #delete same indices in all list, add to result list
+    for arg in args:
+        n = np.delete(arg, index).tolist()
+        results.append(n)
+
+    return(tuple(results))
+
+x = [1, 3, "fvd", 546, "ffd", 6, 3]
+y =  [45, "vfd", "sdfs", 4, "dfc", 9, "scf"]
+
+j, r = delna(x, y)
+print(j, r) #returns ['1', '546', '6']['45', '4', '9']
