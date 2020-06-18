@@ -11,10 +11,10 @@ Returns a tuple of list for multiple variable assignments.
 
 #### *avgna()*
 Takes the argument of a single list (currently), reassigns empty or NaN values in that list with
-the mean number of that dataset. Takes an additonal argument of number of decimals user wants
+the mean number of that dataset. Takes an additional argument of number of decimals user wants
 returned in that mean value.
 ###### ex: avgna(list, 3)
-####### If available, the mean value (value taking the empty values place, will return a number up to 3 decimal places)
+###### If available, the mean value (value taking the empty values place, will return a number up to 3 decimal places)
 
 #### *delna()*
 Takes the argument of multiple list, deletes entire rows that contain empty or NaN values.
